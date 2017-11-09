@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1>Person</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for person in people %}
+      <tr>
+        <td>{{ person.id }}</td>
+        <td>{{ person.name }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+
+  <h2>Add new person</h2>
+
+  {{ form_start(form, {'action': path('add')}) }}
+    {{ form_widget(form) }}
+    <button type="submit">Save</button>
+  {{ form_end(form) }}
+
+  <p>Counter: {{ counter }}</p>
+{% endblock %}

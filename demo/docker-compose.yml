@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    image: hacfi/polycon-meetup
+    ports:
+      - 80:80
+    links:
+      - db
+      - redis
+    volumes:
+      - .:/app
+    environment:
+      - "DATABASE_URL=pgsql://user:pass@db:5432/dbname"
+      - "REDIS_HOST=redis"
+
+  db:
+    image: postgres:9.6.5
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=dbname
+
+  redis:
+    image: redis:3.2.6
+    ports:
+      - 6379:6379

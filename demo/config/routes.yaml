@@ -1,0 +1,7 @@
+index:
+    path: /
+    defaults: { _controller: 'App\Controller\DemoController::index' }
+
+add:
+    path: /add
+    defaults: { _controller: 'App\Controller\DemoController::add' }
