@@ -26,7 +26,7 @@ ssh admin@>>>IP-from-step-2<<<
 sudo -i
 
 apt-get update
-apt-get install \
+apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -66,13 +66,14 @@ docker run -d -p 6379:6379 --name redis redis:3.2.6
 6. Create systemd service
 
 ```
-exit  # return to your host
-scp systemd/docker_polycon_app.service polycon.env admin@>>>IP-from-step-2<<<:
+exit  # exit root
+exit  # exit EC2 instance & return to host
+scp systemd/docker_polycon_app.service systemd/polycon.env admin@>>>IP-from-step-2<<<:
 ssh admin@>>>IP-from-step-2<<<
 sudo -i
 mkdir /etc/docker-container
-mv ~/polycon.env /etc/docker-container
-mv ~/docker_polycon_app.service /etc/systemd/system
+mv /home/admin/polycon.env /etc/docker-container
+mv /home/admin/docker_polycon_app.service /etc/systemd/system
 ```
 
 6. Start systemd service & create database schema
