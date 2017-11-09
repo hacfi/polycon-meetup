@@ -1,0 +1,16 @@
+[Unit]
+Description=Docker Polycon app
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=/usr/bin/docker pull hacfi/polycon-meetup
+ExecStart=/usr/local/bin/systemd-docker run --rm --env-file=/etc/docker-container/polycon.env -p 80:80 --link db --link redis --name %n hacfi/polycon-meetup
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
